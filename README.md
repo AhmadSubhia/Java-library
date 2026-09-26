@@ -56,3 +56,11 @@ programmet inte kraschar.
 
 Projektet är ett enkelt CLI-bibliotekssystem där användaren kan hantera
 böcker och medlemmar genom en meny.
+
+## Lärdomar
+
+Under arbetet med projektet har jag tränat på Java, klasser, records,
+metoder, arrayer och felhantering.
+
+Jag har fått träna på Git och Maven och att bygga ett enkelt
+program med en interaktiv meny.
