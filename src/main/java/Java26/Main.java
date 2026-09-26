@@ -24,7 +24,8 @@ public class Main {
             System.out.println("e. Avsluta");
             System.out.print("Välje: ");
 
-            String choice = scanner.nextLine();
+
+            String choice = scanner.nextLine().trim().toLowerCase();
 
             try {
 
@@ -88,7 +89,7 @@ public class Main {
                         library.showBooks();
                         break;
 
-                    case "E":
+                    case "e":
                         running = false;
                         System.out.println("Program Avslutad.");
                         break;
