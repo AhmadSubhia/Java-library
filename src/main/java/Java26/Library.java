@@ -72,6 +72,19 @@ public class Library {
         return -1;
     }
 
+
+    private int findBookByIsbn(String isbn) {
+
+        for (int i = 0; i < books.length; i++) {
+
+            if (books[i] != null && books[i].isbn().equals(isbn)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     private Member findMember(int id) {
 
         for (Member member : members) {
@@ -105,9 +118,9 @@ public class Library {
         }
     }
 
-    public void borrowBook(String text, int memberId) {
+    public void borrowBook(String isbn, int memberId) {
 
-        int bookIndex = findBook(text);
+        int bookIndex = findBookByIsbn(isbn);
         Member member = findMember(memberId);
 
         if (bookIndex == -1) {
@@ -135,6 +148,7 @@ public class Library {
         member.setActiveLoans(member.getActiveLoans() + 1);
 
         System.out.println("Book borrowed.");
+
     }
 
     public void returnBook(String text, int memberId) {
@@ -167,8 +181,33 @@ public class Library {
 
         System.out.println("Book returned.");
     }
+    private void sortBooksByTitle() {
 
+        for (int i = 0; i < books.length - 1; i++) {
+
+            for (int j = 0; j < books.length - 1 - i; j++) {
+
+                if (books[j] != null && books[j + 1] != null &&
+                        books[j].title().compareToIgnoreCase(books[j + 1].title()) > 0) {
+
+                    Book tempBook = books[j];
+                    books[j] = books[j + 1];
+                    books[j + 1] = tempBook;
+
+                    boolean tempBorrowed = borrowed[j];
+                    borrowed[j] = borrowed[j + 1];
+                    borrowed[j + 1] = tempBorrowed;
+
+                    int tempBorrowedBy = borrowedBy[j];
+                    borrowedBy[j] = borrowedBy[j + 1];
+                    borrowedBy[j + 1] = tempBorrowedBy;
+                }
+            }
+        }
+    }
     public void showBooks() {
+
+        sortBooksByTitle();
 
         boolean found = false;
 
