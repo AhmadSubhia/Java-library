@@ -8,6 +8,7 @@ public class Library {
     private int[] borrowedBy = new int[10];
 
     public Library() {
+
         members[0] = new Member(1, "Ahmad");
         members[1] = new Member(2, "Oskar");
         members[2] = new Member(3, "Laura");
@@ -16,10 +17,40 @@ public class Library {
             borrowedBy[i] = -1;
         }
     }
+private void expandBookArrays() {
 
-    public void addBook(Book book) {
+        Book[] newBooks = new Book[books.length * 2];
+        boolean[] newBorrowed = new boolean[borrowed.length * 2];
+        int[] newBorrowedBy = new int[borrowedBy.length * 2];
+
+        for (int i = 0; i < books.length; i++) {
+            newBooks[i] = books[i];
+            newBorrowed[i] = borrowed[i];
+            newBorrowedBy[i] = borrowedBy[i];
+        }
+
+        for (int i = borrowedBy.length; i < newBorrowedBy.length; i++) {
+            newBorrowedBy[i] = -1;
+        }
+
+        books = newBooks;
+        borrowed = newBorrowed;
+        borrowedBy = newBorrowedBy;
+    }
+private void expandMemberArray() {
+
+        Member[] newMembers = new Member[members.length * 2];
+
+        for (int i = 0; i < members.length; i++) {
+            newMembers[i] = members[i];
+        }
+
+        members = newMembers;
+    }
+ public void addBook(Book book) {
 
         for (Book b : books) {
+
             if (b != null && b.isbn().equals(book.isbn())) {
                 System.out.println("ISBN already exists.");
                 return;
@@ -27,6 +58,7 @@ public class Library {
         }
 
         for (int i = 0; i < books.length; i++) {
+
             if (books[i] == null) {
                 books[i] = book;
                 System.out.println("Book added.");
@@ -34,12 +66,21 @@ public class Library {
             }
         }
 
-        System.out.println("Book array is full.");
-    }
+        expandBookArrays();
 
-    public void addMember(Member member) {
+        for (int i = 0; i < books.length; i++) {
+
+            if (books[i] == null) {
+                books[i] = book;
+                System.out.println("Book added.");
+                return;
+            }
+        }
+    }
+ public void addMember(Member member) {
 
         for (Member m : members) {
+
             if (m != null && m.getId() == member.getId()) {
                 System.out.println("Member ID already exists.");
                 return;
@@ -47,6 +88,7 @@ public class Library {
         }
 
         for (int i = 0; i < members.length; i++) {
+
             if (members[i] == null) {
                 members[i] = member;
                 System.out.println("Member registered.");
@@ -54,10 +96,18 @@ public class Library {
             }
         }
 
-        System.out.println("Member array is full.");
-    }
+        expandMemberArray();
 
-    private int findBook(String text) {
+        for (int i = 0; i < members.length; i++) {
+
+            if (members[i] == null) {
+                members[i] = member;
+                System.out.println("Member registered.");
+                return;
+            }
+        }
+    }
+ private int findBook(String text) {
 
         for (int i = 0; i < books.length; i++) {
 
@@ -71,9 +121,7 @@ public class Library {
 
         return -1;
     }
-
-
-    private int findBookByIsbn(String isbn) {
+private int findBookByIsbn(String isbn) {
 
         for (int i = 0; i < books.length; i++) {
 
@@ -84,8 +132,7 @@ public class Library {
 
         return -1;
     }
-
-    private Member findMember(int id) {
+private Member findMember(int id) {
 
         for (Member member : members) {
 
@@ -96,8 +143,7 @@ public class Library {
 
         return null;
     }
-
-    public void searchBook(String text) {
+ public void searchBook(String text) {
 
         boolean found = false;
 
@@ -117,8 +163,7 @@ public class Library {
             System.out.println("No book found.");
         }
     }
-
-    public void borrowBook(String isbn, int memberId) {
+ public void borrowBook(String isbn, int memberId) {
 
         int bookIndex = findBookByIsbn(isbn);
         Member member = findMember(memberId);
@@ -145,13 +190,12 @@ public class Library {
 
         borrowed[bookIndex] = true;
         borrowedBy[bookIndex] = memberId;
+
         member.setActiveLoans(member.getActiveLoans() + 1);
 
         System.out.println("Book borrowed.");
-
     }
-
-    public void returnBook(String text, int memberId) {
+public void returnBook(String text, int memberId) {
 
         int bookIndex = findBook(text);
 
@@ -181,13 +225,14 @@ public class Library {
 
         System.out.println("Book returned.");
     }
-    private void sortBooksByTitle() {
+ private void sortBooksByTitle() {
 
         for (int i = 0; i < books.length - 1; i++) {
 
             for (int j = 0; j < books.length - 1 - i; j++) {
 
-                if (books[j] != null && books[j + 1] != null &&
+                if (books[j] != null &&
+                        books[j + 1] != null &&
                         books[j].title().compareToIgnoreCase(books[j + 1].title()) > 0) {
 
                     Book tempBook = books[j];
@@ -205,7 +250,7 @@ public class Library {
             }
         }
     }
-    public void showBooks() {
+ public void showBooks() {
 
         sortBooksByTitle();
 
@@ -223,15 +268,17 @@ public class Library {
                 );
 
                 if (borrowed[i]) {
+
                     System.out.println(
                             " | Borrowed by member: " + borrowedBy[i]
                     );
+
                 } else {
+
                     System.out.println(" | Available");
                 }
             }
         }
-
         if (!found) {
             System.out.println("No books available.");
         }
