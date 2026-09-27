@@ -1,66 +1,66 @@
-# Bibliotekshanteraren
+# Library Management System
 
-Det här projektet är ett enkelt bibliotekssystem byggt i Java.
+A simple command-line library management system written in Java.
 
-## Funktioner
+## Features
 
-Programmet kan:
+- Add books
+- Register members
+- Borrow books using ISBN
+- Return books
+- Search books by title or author
+- Display all books sorted by title
+- Handle invalid input
+- Dynamically expand arrays when they are full
 
-- Lägga till böcker
-- Registrera medlemmar
-- Låna böcker
-- Lämna tillbaka böcker
-- Söka efter böcker
-- Visa alla böcker och deras status
-- Hantera felaktig inmatning
-
-## Teknik
-
-Projektet är byggt med:
+## Technologies
 
 - Java
-- Objektorienterad programmering
-- Arrays
 - Maven
+- Git
+- GitHub
 - IntelliJ IDEA
 
-## Design
+## Project Structure
 
-### Book
+- `Book` - Record containing ISBN, title and author
+- `Member` - Class representing a library member
+- `Library` - Handles books, members, borrowing and returning
+- `Main` - Command-line menu and user interaction
 
-`Book` är en `record` eftersom en bok främst innehåller data:
-ISBN, titel och författare.
+## Error Handling
 
-En `record` passar bra eftersom Java automatiskt skapar bland annat
-constructor och metoder för att läsa värdena.
+The program handles invalid menu choices and invalid number input without crashing.
 
-### Member
+## Arrays
 
-`Member` är en vanlig klass eftersom en medlem har data och även
-beteende, till exempel hur många böcker medlemmen har lånat.
+The project uses regular Java arrays instead of the Collections Framework, as required by the assignment.
 
-Fälten är `private` för att använda inkapsling.
+When the arrays become full, new larger arrays are created manually and the existing data is copied over.
 
-### Library
+## Lessons Learned
 
-`Library` använder vanliga arrayer för att lagra böcker och medlemmar.
-Projektet använder inte `ArrayList`, eftersom uppgiften kräver vanliga
-arrayer.
+During this project I practiced:
 
-## Felhantering
+- Java syntax
+- Variables and data types
+- Methods
+- Classes and objects
+- Constructors
+- Encapsulation
+- Records
+- Arrays
+- Loops
+- Error handling
+- Searching and sorting
+- Git and GitHub
+- Maven
+- Command-line applications
 
-Programmet hanterar felaktiga menyval och felaktiga nummer så att
-programmet inte kraschar.
+## How to Run
 
-## Sammanfattning
+Run the `Main` class to start the application.
 
-Projektet är ett enkelt CLI-bibliotekssystem där användaren kan hantera
-böcker och medlemmar genom en meny.
+## Author
 
-## Lärdomar
-
-Under arbetet med projektet har jag tränat på Java, klasser, records,
-metoder, arrayer och felhantering.
-
-Jag har fått träna på Git och Maven och att bygga ett enkelt
-program med en interaktiv meny.
+Ahmad
