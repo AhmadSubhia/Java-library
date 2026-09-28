@@ -17,7 +17,8 @@ public class Library {
             borrowedBy[i] = -1;
         }
     }
-private void expandBookArrays() {
+
+    private void expandBookArrays() {
 
         Book[] newBooks = new Book[books.length * 2];
         boolean[] newBorrowed = new boolean[borrowed.length * 2];
@@ -37,7 +38,8 @@ private void expandBookArrays() {
         borrowed = newBorrowed;
         borrowedBy = newBorrowedBy;
     }
-private void expandMemberArray() {
+
+    private void expandMemberArray() {
 
         Member[] newMembers = new Member[members.length * 2];
 
@@ -47,7 +49,8 @@ private void expandMemberArray() {
 
         members = newMembers;
     }
- public void addBook(Book book) {
+
+    public void addBook(Book book) {
 
         for (Book b : books) {
 
@@ -77,12 +80,13 @@ private void expandMemberArray() {
             }
         }
     }
- public void addMember(Member member) {
 
-        for (Member m : members) {
+    public void addMember(Member member) {
 
-            if (m != null && m.getId() == member.getId()) {
-                System.out.println("Member ID already exists.");
+        for (Member member1 : members) {
+
+            if (member1 != null && member1.getId() == member.getId()) {
+                System.out.println("Member already exists.");
                 return;
             }
         }
@@ -107,7 +111,8 @@ private void expandMemberArray() {
             }
         }
     }
- private int findBook(String text) {
+
+    private int findBook(String text) {
 
         for (int i = 0; i < books.length; i++) {
 
@@ -121,18 +126,22 @@ private void expandMemberArray() {
 
         return -1;
     }
-private int findBookByIsbn(String isbn) {
+
+    private int findBookByIsbn(String isbn) {
 
         for (int i = 0; i < books.length; i++) {
 
-            if (books[i] != null && books[i].isbn().equals(isbn)) {
+            if (books[i] != null &&
+                    books[i].isbn().equals(isbn)) {
+
                 return i;
             }
         }
 
         return -1;
     }
-private Member findMember(int id) {
+
+    private Member findMember(int id) {
 
         for (Member member : members) {
 
@@ -143,7 +152,8 @@ private Member findMember(int id) {
 
         return null;
     }
- public void searchBook(String text) {
+
+    public void searchBook(String text) {
 
         boolean found = false;
 
@@ -154,7 +164,6 @@ private Member findMember(int id) {
                             || book.author().toLowerCase().contains(text.toLowerCase()))) {
 
                 System.out.println(book.title() + " - " + book.author());
-
                 found = true;
             }
         }
@@ -163,7 +172,8 @@ private Member findMember(int id) {
             System.out.println("No book found.");
         }
     }
- public void borrowBook(String isbn, int memberId) {
+
+    public void borrowBook(String isbn, int memberId) {
 
         int bookIndex = findBookByIsbn(isbn);
         Member member = findMember(memberId);
@@ -184,7 +194,7 @@ private Member findMember(int id) {
         }
 
         if (!member.canBorrow()) {
-            System.out.println("Member cannot borrow more books.");
+            System.out.println("Member can't borrow more books.");
             return;
         }
 
@@ -195,7 +205,8 @@ private Member findMember(int id) {
 
         System.out.println("Book borrowed.");
     }
-public void returnBook(String text, int memberId) {
+
+    public void returnBook(String text, int memberId) {
 
         int bookIndex = findBook(text);
 
@@ -210,14 +221,16 @@ public void returnBook(String text, int memberId) {
         }
 
         if (borrowedBy[bookIndex] != memberId) {
-            System.out.println("This book belongs to another member.");
+            System.out.println("The book belongs to another member."
+            );
             return;
         }
 
         Member member = findMember(memberId);
 
         if (member != null) {
-            member.setActiveLoans(member.getActiveLoans() - 1);
+            member.setActiveLoans(member.getActiveLoans() - 1
+            );
         }
 
         borrowed[bookIndex] = false;
@@ -225,32 +238,36 @@ public void returnBook(String text, int memberId) {
 
         System.out.println("Book returned.");
     }
- private void sortBooksByTitle() {
+
+    private void sortBooksByTitle() {
 
         for (int i = 0; i < books.length - 1; i++) {
 
-            for (int j = 0; j < books.length - 1 - i; j++) {
+            for (int b = 0; b < books.length - 1 - i; b++) {
 
-                if (books[j] != null &&
-                        books[j + 1] != null &&
-                        books[j].title().compareToIgnoreCase(books[j + 1].title()) > 0) {
+                if (books[b] != null &&
+                        books[b + 1] != null &&
+                        books[b].title().compareToIgnoreCase(
+                                books[b + 1].title()
+                        ) > 0) {
 
-                    Book tempBook = books[j];
-                    books[j] = books[j + 1];
-                    books[j + 1] = tempBook;
+                    Book tempBook = books[b];
+                    books[b] = books[b + 1];
+                    books[b + 1] = tempBook;
 
-                    boolean tempBorrowed = borrowed[j];
-                    borrowed[j] = borrowed[j + 1];
-                    borrowed[j + 1] = tempBorrowed;
+                    boolean tempBorrowed = borrowed[b];
+                    borrowed[b] = borrowed[b + 1];
+                    borrowed[b + 1] = tempBorrowed;
 
-                    int tempBorrowedBy = borrowedBy[j];
-                    borrowedBy[j] = borrowedBy[j + 1];
-                    borrowedBy[j + 1] = tempBorrowedBy;
+                    int tempBorrowedBy = borrowedBy[b];
+                    borrowedBy[b] = borrowedBy[b + 1];
+                    borrowedBy[b + 1] = tempBorrowedBy;
                 }
             }
         }
     }
- public void showBooks() {
+
+    public void showBooks() {
 
         sortBooksByTitle();
 
@@ -262,23 +279,20 @@ public void returnBook(String text, int memberId) {
 
                 found = true;
 
-                System.out.print(
-                        books[i].title() + " - " +
-                                books[i].author()
+                System.out.println(books[i].title() + " - " + books[i].author()
                 );
 
                 if (borrowed[i]) {
 
-                    System.out.println(
-                            " | Borrowed by member: " + borrowedBy[i]
-                    );
+                    System.out.println("  Borrowed by member: " + borrowedBy[i]);
 
                 } else {
 
-                    System.out.println(" | Available");
+                    System.out.println("  Available");
                 }
             }
         }
+
         if (!found) {
             System.out.println("No books available.");
         }
