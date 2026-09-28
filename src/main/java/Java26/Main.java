@@ -13,7 +13,6 @@ public class Main {
 
         while (running) {
 
-            System.out.println();
             System.out.println("Library:");
             System.out.println("1. Add Book");
             System.out.println("2. Register Member");
