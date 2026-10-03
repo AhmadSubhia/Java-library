@@ -20,6 +20,7 @@ public class Main {
             System.out.println("4. Return Book");
             System.out.println("5. Search Book");
             System.out.println("6. Show All Books");
+            System.out.println("7. Show Statistics");
             System.out.println("e. Exit");
             System.out.print("Choose an option: ");
 
@@ -125,6 +126,10 @@ public class Main {
 
                         library.showBooks();
 
+                        break;
+
+                    case "7":
+                        library.showStatistics();
                         break;
 
                     case "e":

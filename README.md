@@ -34,6 +34,21 @@ The program handles invalid menu choices and invalid number input without crashi
 
 ## Arrays
 
+he project uses regular Java arrays instead of the Collections Framework, as required by the assignment.
+
+When the arrays become full, new larger arrays are created manually and the existing data is copied over.
+
+## Reflection: Java Collections Framework
+
+In this assignment, I used regular Java arrays instead of the Java Collections Framework.
+
+If I were allowed to use the Java Collections Framework, I would use an `ArrayList` instead of manually managing the arrays.
+
+For example:
+
+```java
+ArrayList<Book> books = new ArrayList<>();
+
 The project uses regular Java arrays instead of the Collections Framework, as required by the assignment.
 
 When the arrays become full, new larger arrays are created manually and the existing data is copied over.

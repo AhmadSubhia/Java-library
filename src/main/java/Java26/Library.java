@@ -238,6 +238,27 @@ public class Library {
 
         System.out.println("Book returned.");
     }
+    public void showStatistics() {
+
+        Member memberWithMostLoans = null;
+        int maxLoans = 0;
+
+        for (Member member : members) {
+
+            if (member != null && member.getActiveLoans() > maxLoans) {
+                maxLoans = member.getActiveLoans();
+                memberWithMostLoans = member;
+            }
+        }
+
+        if (memberWithMostLoans != null) {
+            System.out.println("Member with most active loans: "
+                    + memberWithMostLoans.getName()
+                    + " - " + maxLoans + " active loans");
+        } else {
+            System.out.println("No members found.");
+        }
+    }
 
     private void sortBooksByTitle() {
 
